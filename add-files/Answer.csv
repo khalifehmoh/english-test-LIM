@@ -1,0 +1,574 @@
+1,surprised,1,1
+2,surprising,1,0
+3,surprise,1,0
+4,bill,2,0
+5,money,2,0
+6,tip,2,1
+7,themselves,3,0
+8,them,3,1
+9,their,3,0
+10,a,4,0
+11,any,4,0
+12,some,4,1
+13,wants,5,1
+14,does want,5,0
+15,want,5,0
+16,despite,6,0
+17,although,6,1
+18,in spite,6,0
+19,may,7,1
+20,can,7,0
+21,should,7,0
+22,keen,8,1
+23,fond,8,0
+24,interested,8,0
+25,mustn’t,9,0
+26,haven’t to,9,0
+27,don’t have to,9,1
+28,parents’,10,1
+29,parents,10,0
+30,parent’s,10,0
+31,I’m going to help,11,0
+32,I’m helping,11,0
+33,I will help,11,1
+34,search,12,0
+35,interview,12,1
+36,talk,12,0
+37,pay back it,13,0
+38,pay it back,13,1
+39,pay it back me,13,0
+40,fit,14,1
+41,go with,14,0
+42,suit,14,0
+43,that I invite,15,0
+44,me to invite,15,1
+45,that I invited,15,0
+46,quieter,16,0
+47,quietlier,16,0
+48,more quietly,16,1
+49,Please.,17,0
+50,Here you are.,17,1
+51,Help yourself to it.,17,0
+52,too good,18,0
+53,good enough,18,1
+54,enough good,18,0
+55,such,19,1
+56,that,19,0
+57,so,19,0
+58,used to smoke,20,1
+59,used to smoking,20,0
+60,uses to smoke,20,0
+61,arriving,21,0
+62,entering,21,0
+63,moving,21,1
+64,gets riding,22,0
+65,goes on a bike,22,0
+66,goes cycling,22,1
+67,will be translated,23,1
+68,will translate,23,0
+69,was translated,23,0
+70,from,24,0
+71,for,24,1
+72,since,24,0
+73,to explain,25,0
+74,that I explain,25,0
+75,explain,25,1
+76,How,26,0
+77,Who,26,0
+78,What,26,1
+79,Where,26,0
+80,We're,27,0
+81,I'm,27,0
+82,You're,27,0
+83,They're,27,1
+84,Where are you from?,28,1
+85,Where you are from?,28,0
+86,Where from you are?,28,0
+87,From where you are?,28,0
+88,They,29,0
+89,It,29,1
+90,He,29,0
+91,She,29,0
+92,spell,30,0
+93,you spell,30,0
+94,do you spell,30,1
+95,spell you,30,0
+96,This,31,0
+97,These,31,1
+98,That,31,0
+99,It,31,0
+100,a ,32,0
+101,an,32,1
+102,two,32,0
+103,desk,33,1
+104,desks,33,0
+105,a desk,33,0
+106,an desk,33,0
+107,I'm,34,0
+108,We're,34,1
+109,She's,34,0
+110,They're,34,0
+111,I isn't,35,0
+112,I is not,35,0
+113,I aren't,35,0
+114,I'm not,35,1
+115,Are they teachers?,36,0
+116,Are you from Italy?,36,0
+117,Is Mr Banning a teacher?,36,1
+118,Is this your phone?,36,0
+119,How many years,37,0
+120,How much years,37,0
+121,What years,37,0
+122,How old,37,1
+123,job Mary,38,0
+124,Mary job,38,0
+125,Mary's job,38,1
+126,job's Mary,38,0
+127,on,39,0
+128,to,39,1
+129,in,39,0
+130,of,39,0
+131,What,40,0
+132,When,40,0
+133,Where,40,1
+134,Who,40,0
+135,with,41,0
+136,by,41,1
+137,for,41,0
+138,in,41,0
+139,not have,42,0
+140,don't have,42,0
+141,don't has,42,0
+142,doesn't have,42,1
+143,work,43,0
+144,works,43,1
+145,is work,43,0
+146,working,43,0
+147,Are,44,0
+148,Is,44,0
+149,Do,44,1
+150,Does,44,0
+151,We not often go,45,0
+152,We don't go often,45,0
+153,We don't often go,45,1
+154,Often we don't go,45,0
+155,On,46,1
+156,In,46,0
+157,At,46,0
+158,By,46,0
+159,starts he,47,0
+160,do he starts,47,0
+161,does he starts,47,0
+162,does he start,47,1
+163,It is,48,0
+164,There is,48,0
+165,There are,48,1
+166,This is,48,0
+167,a restaurants,49,0
+168,any restaurants,49,1
+169,any restaurant,49,0
+170,a restaurant,49,0
+171,a hotel expensive,50,0
+172,expensive hotel,50,0
+173,expensive a hotel,50,0
+174,an expensive hotel,50,1
+175,Was you,51,0
+176,Were you,51,1
+177,Did you,51,0
+178,Is you,51,0
+179,"Yes, it is.",52,1
+180,"Yes, they are.",52,0
+181,"No, it not.",52,0
+182,"No, they isn’t.",52,0
+183,does,53,1
+184,do,53,0
+185,have,53,0
+186,was,53,0
+187,When time,54,0
+188,What time,54,1
+189,What kind of,54,0
+190,What for,54,0
+191,want,55,0
+192,did,55,0
+193,didn’t want,55,0
+194,didn’t wanted,55,1
+195,did you go,56,1
+196,went you,56,0
+197,did you went,56,0
+198,did go,56,0
+199,used to be,57,1
+200,would be,57,0
+201,has,57,0
+202,has been,57,0
+203,was eat,58,0
+204,eats,58,0
+205,was eating,58,1
+206,has eating,58,0
+207,isn’t some,59,0
+208,isn’t any,59,1
+209,any,59,0
+210,?,59,0
+211,Many of,60,0
+212,Many,60,1
+213,Some of,60,0
+214,?,60,0
+215,too much,61,0
+216,a lot of,61,1
+217,a little,61,0
+218,not much,61,0
+219,is communicating,62,0
+220,communicates,62,1
+221,will communicating,62,0
+222,?,62,0
+223,are wanting,63,0
+224,wanting,63,0
+225,getting,63,0
+226,are getting,63,1
+227,want to,64,1
+228,are wanting to,64,0
+229,wanting to,64,0
+230,used to want,64,0
+231,go,65,0
+232,to go,65,1
+233,going,65,0
+234,to going,65,0
+235,am flying,66,1
+236,flying,66,0
+237,am go flying,66,0
+238,will flying,66,0
+239,raining,67,0
+240,will raining,67,0
+241,rains,67,0
+242,’s raining,67,1
+243,will go,68,0
+244,going,68,0
+245,go,68,0
+246,are going,68,1
+247,bring,69,0
+248,spend,69,1
+249,spending,69,0
+250,making,69,0
+251,extreme,70,0
+252,extremely,70,1
+253,bit,70,0
+254,very much,70,0
+255,traditional,71,0
+256,traditionaler,71,0
+257,more traditional than,71,1
+258,traditionaler than,71,0
+259,hotter than,72,1
+260,more hot than,72,0
+261,hotter as,72,0
+262,as hot,72,0
+263,expensive,73,0
+264,expensivest,73,0
+265,more expensive,73,0
+266,most expensive,73,1
+267,eaten,74,0
+268,have eat,74,0
+269,have ever eaten,74,0
+270,have never eaten,74,1
+271,yet,75,0
+272,already,75,1
+273,ever,75,0
+274,never,75,0
+275,should to email,76,0
+276,should email,76,1
+277,should emailing,76,0
+278,?,76,0
+279,might be,77,1
+280,is going to being,77,0
+281,will being,77,0
+282,might have,77,0
+283,won’t,78,0
+284,will,78,1
+285,?,78,0
+286,going to,78,0
+287,will,79,0
+288,be able to,79,0
+289,will be able to,79,1
+290,will able to,79,0
+291,showed,80,0
+292,shown,80,0
+293,is shown,80,0
+294,was shown,80,1
+295,by,81,1
+296,from,81,0
+297,for,81,0
+298,with,81,0
+299,since,82,0
+300,for,82,1
+301,with,82,0
+302,it,82,0
+303,had,83,0
+304,has had,83,1
+305,had,83,0
+306,is had,83,0
+307,on Friday,84,0
+308,yesterday,84,0
+309,two days ago,84,0
+310,this week,84,1
+311,one year ago?,85,0
+312,in the last twelve months?,85,1
+313,yesterday?,85,0
+314,last week?,85,0
+315,for buying,86,0
+316,to buy,86,1
+317,to buying,86,0
+318,?,86,0
+319,must,87,0
+320,mustn’t,87,0
+321,could,87,0
+322,don’t have to,87,1
+323,have,88,0
+324,wearing,88,0
+325,wear,88,1
+326,having,88,0
+327,who,89,1
+328,which,89,0
+329,she,89,0
+330,where,89,0
+331,who,90,0
+332,which,90,1
+333,it,90,0
+334,?,90,0
+335,immigrants,91,1
+336,emigrants,91,0
+337,invaders,91,0
+338,colonies,91,0
+339,ceremony,92,0
+340,reception,92,1
+341,speech,92,0
+342,group,92,0
+343,get on well with,93,0
+344,have in commn,93,0
+345,keep in touch with,93,1
+346,see each other,93,0
+347,carrier,94,0
+348,job,94,0
+349,career,94,1
+350,work,94,0
+351,money,95,0
+352,salary,95,1
+353,job,95,0
+354,earnings,95,0
+355,keen,96,0
+356,interesting,96,0
+357,interested,96,1
+358,fond,96,0
+359,failed,97,1
+360,passed,97,0
+361,missed,97,0
+362,fell,97,0
+363,home,98,0
+364,housewife,98,0
+365,housework,98,1
+366,homework,98,0
+367,get,99,0
+368,celebrate,99,0
+369,contribute,99,1
+370,affect,99,0
+371,took,100,0
+372,put,100,1
+373,called,100,0
+374,logged,100,0
+375,becomes,101,0
+376,became,101,1
+377,has become,101,0
+378,would become,101,0
+379,was he,102,0
+380,wasn’t he,102,0
+381,is he,102,1
+382,isn’t he,102,0
+383,did,103,0
+384,do,103,0
+385,have,103,1
+386,were,103,0
+387,did,104,1
+388,were,104,0
+389,have,104,0
+390,had,104,0
+391,forever talk,105,0
+392,is forever talking,105,1
+393,will forever be talking,105,0
+394,has forever been talking,105,0
+395,to leave,106,0
+396,leaves,106,0
+397,leave,106,0
+398,leaving,106,1
+399,used to take,107,0
+400,would take,107,0
+401,took,107,1
+402,has taken,107,0
+403,didn't use to,108,0
+404,wouldn't,108,0
+405,didn't have to,108,0
+406,wasn't used to,108,1
+407,that,109,0
+408,which,109,1
+409,whose,109,0
+410,?,109,0
+411,who,110,0
+412,whose,110,0
+413,where,110,0
+414,?,110,1
+415,suffered,111,0
+416,suffering,111,1
+417,who suffering,111,0
+418,were suffering,111,0
+419,in case,112,1
+420,otherwise,112,0
+421,so that,112,0
+422,in order to,112,0
+423,so that,113,0
+424,in order to,113,1
+425,although,113,0
+426,in case,113,0
+427,has seen,114,0
+428,has been seeing,114,0
+429,saw,114,1
+430,used to seeing,114,0
+431,is feeling,115,0
+432,feels,115,0
+433,felt,115,0
+434,has been feeling,115,1
+435,left,116,0
+436,has left,116,0
+437,had left,116,1
+438,was leaving,116,0
+439,made,117,0
+440,had made,117,0
+441,have made,117,0
+442,were making,117,1
+443,Wherever,118,0
+444,Whovever,118,0
+445,Whatever,118,1
+446,However,118,0
+447,had gone,119,0
+448,have been going,119,0
+449,were going,119,0
+450,had been going,119,1
+451,as long as,120,0
+452,provided,120,0
+453,unless,120,1
+454,if,120,0
+455,didn't stop,121,0
+456,hadn't stopped,121,1
+457,don't stop,121,0
+458,wouldn't have stopped,121,0
+459,hadn't gone,122,1
+460,wouldn't go,122,0
+461,haven't gone,122,0
+462,didn't go,122,0
+463,would have,123,0
+464,have had,123,0
+465,had,123,1
+466,have,123,0
+467,am calling,124,0
+468,call,124,0
+469,have called,124,0
+470,will call,124,1
+471,will be preparing,125,0
+472,will have prepared,125,1
+473,prepare,125,0
+474,have prepared,125,0
+475,are talking,126,0
+476,will have talked,126,0
+477,will be talking,126,1
+478,talk,126,0
+479,may lose,127,0
+480,must lost,127,0
+481,might have lost,127,1
+482,should have lost,127,0
+483,can't,128,0
+484,couldn't,128,0
+485,didn't allow,128,0
+486,weren't allowed,128,1
+487,needn't buy,129,0
+488,mustn't buy,129,0
+489,didn't need to buy,129,1
+490,mustn't have bought,129,0
+491,of,130,1
+492,to,130,0
+493,at,130,0
+494,in,130,0
+495,extremely,131,0
+496,absolutely,131,1
+497,very,131,0
+498,fairly,131,0
+499,Even though,132,1
+500,However,132,0
+501,In spite of,132,0
+502,Despite,132,0
+503,us,133,0
+504,?,133,0
+505,ourselves,133,1
+506,we,133,0
+507,had he been,134,0
+508,was he,134,0
+509,he had been,134,1
+510,he has been,134,0
+511,putting,135,0
+512,put on,135,0
+513,to putting on,135,0
+514,to put on,135,1
+515,a,136,0
+516,an,136,0
+517,the,136,1
+518,?,136,0
+519,a,137,0
+520,an,137,1
+521,the,137,0
+522,?,137,0
+523,so,138,1
+524,such,138,0
+525,very,138,0
+526,as,138,0
+527,die,139,0
+528,have died,139,1
+529,had died,139,0
+530,died,139,0
+531,renovate,140,0
+532,renovating,140,0
+533,to renovate,140,0
+534,renovated,140,1
+535,buy,141,0
+536,price,141,0
+537,bargain,141,1
+538,sale,141,0
+539,inquisitive,142,1
+540,obedient,142,0
+541,playful,142,0
+542,unreliable,142,0
+543,matter,143,0
+544,referred,143,0
+545,according,143,0
+546,concerned,143,1
+547,exhibition,144,0
+548,display,144,1
+549,collection,144,0
+550,vision,144,0
+551,did,145,0
+552,made,145,0
+553,took,145,0
+554,got,145,1
+555,agree,146,0
+556,approve,146,1
+557,accept,146,0
+558,support,146,0
+559,up,147,0
+560,off,147,0
+561,down,147,1
+562,over,147,0
+563,assault,148,0
+564,mugging,148,0
+565,hijacking,148,0
+566,smuggling,148,1
+567,give,149,1
+568,get,149,0
+569,take,149,0
+570,borrow,149,0
+571,contact,150,0
+572,call,150,0
+573,touch,150,1
+574,talk,150,0
