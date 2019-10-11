@@ -24,12 +24,6 @@
 
 </script>
 <script type="text/javascript" charset="UTF-8" src="<?php bloginfo('template_directory'); ?>/assets/js/english_assesment.js"></script>
-
-		<style type="text/css">
-
-
-		</style>
-
 		<style type="text/css">
 			.story {
 				height: auto;
