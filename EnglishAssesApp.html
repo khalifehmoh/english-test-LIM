@@ -51,6 +51,7 @@
 	<script type="text/javascript"
 		src="https://lookinmena.com/wp-content/themes/lookinmena/assets/js/mini_app.js?v1.12"></script>
 	<script type="text/javascript" src="./assets/js/english_assesment.js"></script>
+	<script src="js/jquery.barfiller.js"></script>
 
 
 
@@ -234,7 +235,9 @@
 			.js-q-header {
 				text-align: center;
 				margin-top: 32px;
-				margin-bottom: 32px
+				margin-bottom: 32px;
+				text-align: center;
+				width: 100%;
 			}
 
 			.btn-asses-submit,
@@ -255,10 +258,10 @@
 				width: 100%
 			}
 
-			.js-q-box {
-				padding-right: 25px;
-				padding-left: 25px;
-				/* height: 210px; */
+
+
+			.js-nav-box {
+				width: 100%;
 			}
 
 			p {
@@ -281,7 +284,13 @@
 		<div class="body_view">
 			<!-- PAGE CONTENT -->
 			<div id="page-search" ng-controller="profiles_uni_controller">
-				<div class="js-container">
+				<div class="js-container english-main-con">
+					<div id="bar1" class="barfiller">
+						<div class="tipWrap">
+							<span class="tip"></span>
+						</div>
+						<span class="fill" data-percentage="50"></span>
+					</div>
 					<!--home page-->
 					<div class="home-container">
 						<div class="home-sub-con">
