@@ -69,6 +69,28 @@ var incrementTotalMark = function () {
 }
 //Render functions
 
+var renderMainDetails = function (state) {
+  // var perc = state.lastRenderedQuestion - 10;
+  var questionsPageRender = `<div id="questions-form" class="js-question-page">
+    <h2 class="js-q-header">English Assesment</h2>
+    <div class="bar-con">
+      <div class="bar-sub-con">
+      <span style="width:100%; text-align: left;">Progress:</span>
+        <div id="bar1" class="barfiller">
+          <div class="tipWrap">
+            <span class="tip"></span>
+          </div>
+          <span class="fill" data-percentage="0"></span>
+        </div>
+      </div>
+    </div>
+    <div class="js-questions-content">
+    </div>
+  </div>`
+  $(".js-container").html(questionsPageRender);
+
+}
+
 var renderQuestion = function (state) {
   var checkLastAnswer = function () {
     return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"js-choice-submit-button\">Next</button>`
@@ -96,22 +118,15 @@ var renderQuestion = function (state) {
     tenQuestionsDOM += singleQuestionDOM;
   })
 
-
-  var questionsPageRender = "<div id=\"questions-form\" class=\"js-question-page\">" +
-    `<div id="bar1" class="barfiller">
-  <div class="tipWrap">
-    <span class="tip"></span>
-  </div>
-  <span class="fill" data-percentage="50"></span>
-</div>`+
-    "<h2 class=\"js-q-header\">English Assesment</h2>" +
-    tenQuestionsDOM +
-    "<div class=\"js-nav-box\">" +
-    checkLastAnswer() +
-    "</div>" +
-    "</div>"
-  $(".js-container").html(questionsPageRender);
+  var questionsRender = `
+    ${tenQuestionsDOM}
+    <div class="js-nav-box">
+    ${checkLastAnswer()} 
+    </div>`
+  $(".js-questions-content").html(questionsRender);
   clearPageQuestions();
+  $('#bar1').barfiller().calculateFill(state.lastRenderedQuestion - 10);
+
 }
 
 
@@ -188,8 +203,9 @@ function handleStartQuiz() {
     $('.home-container').fadeOut('medium', function () {
       // getQuestionDetails(index)
       getTenQuestionsDetails();
-      renderQuestion(state);
+      renderMainDetails(state);
       $('#bar1').barfiller();
+      renderQuestion(state);
 
       $('.js-q-header').hide().fadeIn(300);
       $('.js-nav-box').css({ 'margin-top': '-30px', 'opacity': '0' }).animate(
@@ -218,9 +234,16 @@ function handleSubmitAnswers() {
     incrementTotalMark();
     getTenQuestionsDetails();
     renderQuestion(state);
+
+    $('.fill').attr("data-percentage", state.lastRenderedQuestion - 10);
+    // $('.fill').css("width", state.lastRenderedQuestion - 10);
     zeroTempMark();
     $('.js-question-text').hide().fadeIn(200);
-    $('.js-choices').hide().fadeIn(400).slideDown()
+    $('.js-choices').hide().fadeIn(400).slideDown();
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#questions-form").offset().top
+    }, 1000);
+
   })
 }
 
