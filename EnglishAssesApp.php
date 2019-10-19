@@ -24,13 +24,7 @@
 
 </script>
 <script type="text/javascript" charset="UTF-8" src="<?php bloginfo('template_directory'); ?>/assets/js/english_assesment.js"></script>
-
-		<style type="text/css">
-
-
-		</style>
-
-		<style type="text/css">
+<style type="text/css">
 			.story {
 				height: auto;
 			}
@@ -77,36 +71,26 @@
 				padding: 0 25px;
 			}
 
-			.js-container {
-				direction: ltr;
-				height: 420px;
-				margin: 35px 0;
-				margin-top: 110px;
-			}
-
-			.js-q-header {
-				margin-top: 32px;
-				margin-bottom: 32px
-			}
-
 			.btn-asses-submit,
 			.js-choice-submit-button {
 				width: 150px;
 				border-radius: 5px;
 			}
 
-			.js-question-text{
-				text-align: center
+			.js-question-page {
+				align-items: flex-start;
 			}
 
-			.btn-english-start{
+			.js-question-text {
+				text-align: left;
+			}
+
+			.btn-english-start {
 				width: 100%
 			}
 
-			.js-q-box {
-				padding-right: 25px;
-				padding-left: 25px;
-				height: 210px;
+			.js-nav-box {
+				width: 100%;
 			}
 
 			p {
@@ -121,17 +105,17 @@
 			}
 
 			button {
-				margin-top: 65px;
+				margin-top: 50px;
 			}
 		</style>
 
 		<!-- test -->
 
-		<div class="body_view">
+		<div class="body_view english_view">
 			<!-- PAGE CONTENT -->
-
 			<div id="page-search" ng-controller="profiles_uni_controller">
 				<div class="js-container english-main-con">
+
 					<!--home page-->
 					<div class="home-container">
 						<div class="home-sub-con">
