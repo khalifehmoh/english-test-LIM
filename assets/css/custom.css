@@ -12611,11 +12611,6 @@ input:checked+.slide-container .nav label {
 
 /* Scholar assesment */
 
-.js-container {
-    /* padding-right: 1%; */
-    /*padding-top: 2%;*/
-}
-
 .hidden {
     display: none;
 }
@@ -12805,11 +12800,6 @@ input:checked+.slide-container .nav label {
     opacity: 1;
 }
 
-
-
-
-
-
 .the_champ_sharing_ul,
 .the_champ_sharing_title {
     display: none;
@@ -12818,15 +12808,20 @@ input:checked+.slide-container .nav label {
 
 /* SCHOOLAR TEST STARTS HERE */
 
-.js-question-page {
+/* .js-question-page {
     align-items: center;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+} */
+
+.js-q-header {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    width: 100%;
+    padding-top: 15px;
 }
-
-
-.js-result-page {}
 
 .bar {
     display: flex;
@@ -12846,7 +12841,14 @@ input:checked+.slide-container .nav label {
     padding-top: 15px;
     display: flex;
     justify-content: center;
+    font-size: 26px;
 }
+
+/* @media screen and (max-width: 768px) {
+    .js-feedback-header {
+        font-size: x-large;
+    }
+} */
 
 .js-choices-box {
     padding-left: 200px;
@@ -12884,9 +12886,9 @@ input:checked+.slide-container .nav label {
         padding-top: 30
     }
 
-    .js-feedback-header {
+    /* .js-feedback-header {
         font-size: 26;
-    }
+    } */
 
     .js-feedback-summary-list {
         padding-left: 50px;
@@ -13219,25 +13221,36 @@ a {
     }
 }
 
+.english_view {
+    direction: ltr;
+    text-align: left;
+}
+
 .js-container.english-main-con {
     direction: ltr;
+    height: 420px;
     margin: 35px 0;
     margin-top: 110px;
 }
 
-@media (max-width: 768px) {
+.english-main-con .js-choice label {
+    transform: none;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+/* @media (max-width: 768px) {
     .js-container.english-main-con {
         margin: unset;
         margin-top: unset
     }
+} */
+
+.english-main-con .js-questions-content {
+    width: 100%;
 }
 
 .js-choice input[type=radio] {
-    transform: scale(1.2);
-}
-
-.js-choice input[type=radio],
-.js-choice label {
     transform: scale(1.2);
     cursor: pointer;
 }
