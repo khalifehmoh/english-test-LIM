@@ -72,7 +72,7 @@ var incrementTotalMark = function () {
 var renderMainDetails = function (state) {
   // var perc = state.lastRenderedQuestion - 10;
   var questionsPageRender = `<div id="questions-form" class="js-question-page">
-    <h2 class="js-q-header">English Assesment</h2>
+    <h2 class="js-q-header tertiary-color">English Assessment</h2>
     <div class="bar-con">
       <div class="bar-sub-con">
       <span style="width:100%; text-align: left;">Progress:</span>
@@ -93,14 +93,14 @@ var renderMainDetails = function (state) {
 
 var renderQuestion = function (state) {
   var checkLastAnswer = function () {
-    return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"js-choice-submit-button\">Next</button>`
+    return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">Next</button>`
   }
   var checkLastAnswer = function () {
     if (state.lastRenderedQuestion >= state.totalQuestions) {
-      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"js-choice-submit-button js-view-result\">Show Result</button>`
+      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button js-view-result\">Show Result</button>`
     }
     else {
-      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"js-choice-submit-button\">Next</button>`
+      return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">Next</button>`
     }
   }
   let tenQuestionsDOM = '';
@@ -112,7 +112,7 @@ var renderQuestion = function (state) {
       "<h5><span class=\"js-q-number\">" + item.queNumber + ": </span>" +
       "<span class=\"js-q-text\">" + item.question + "</span></h5>" +
       "</div>" +
-      "<div class=\"js-choices\">" + item.choices +
+      "<div class=\"js-choices row\">" + item.choices +
       "</div>" +
       "</form>"
     tenQuestionsDOM += singleQuestionDOM;
@@ -286,7 +286,7 @@ function handleProgressBar() {
     $.fn.barfiller = function (options) {
 
       var defaults = $.extend({
-        barColor: '#40abab',
+        barColor: '#006699',
         tooltip: false,
         duration: 1000,
         animateOnResize: false,
@@ -509,10 +509,19 @@ function getTenQuestionsDetails() {
 function generateQuestionAnswersDOM(answersArray) {
   let answersDOMArray = [];
   answersArray.forEach(answer => {
-    let answerHTML = `<div class="js-choice">
+    let colSize = '';
+    if (answersArray.length === 4) {
+      colSize = 'col-md-3'
+    }
+    else if (answersArray.length === 3) {
+      colSize = 'col-md-4'
+    }
+    let answerHTML = `<div class="${colSize} col-sm-12">
+    <div class="js-choice">
     <input class="js-radio-choice" type="radio" name="choice" id="${answer.id}" value="${answer.isRight}">
       <label for="${answer.id}">
        ${answer.title}</label>
+    </div>
     </div>
     `
     answersDOMArray.push(answerHTML);
