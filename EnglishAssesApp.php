@@ -55,11 +55,6 @@
 				text-decoration: underline
 			}
 
-			body {
-				background: url(../wp-content/themes/lookinmena/assets/images/back-english.png) repeat 0 0;
-				animation: slide 45s linear infinite;
-			}
-
 			.home-container {
 				display: flex;
 				align-items: center;
@@ -68,13 +63,14 @@
 			}
 
 			.home-sub-con {
-				padding: 0 25px;
+				padding: 0 75px;
+				width: 100%;
 			}
 
 			.btn-asses-submit,
 			.js-choice-submit-button {
 				width: 150px;
-				border-radius: 5px;
+				border-radius: 25px;
 			}
 
 			.js-question-page {
@@ -82,7 +78,7 @@
 			}
 
 			.js-question-text {
-				text-align: left;
+				text-align: center;
 			}
 
 			.btn-english-start {
@@ -91,6 +87,10 @@
 
 			.js-nav-box {
 				width: 100%;
+			}
+
+			.col-sm-6 {
+				text-align: center;
 			}
 
 			p {
@@ -105,7 +105,7 @@
 			}
 
 			button {
-				margin-top: 50px;
+				margin-top: 25px;
 			}
 		</style>
 
@@ -118,19 +118,15 @@
 
 					<!--home page-->
 					<div class="home-container">
-						<div class="home-sub-con">
-							<div class="bar">
-								<h1 class="home-header">English Proficiency Assesment</h1>
+					<div class="row home-sub-con">
+							<div class="col-sm-6">
+								<img class="img-main-image" src="https://lookinmena.com/wp-content/themes/lookinmena/assets/images/big_logo_test.png" alt="LookInMENA logo">
 							</div>
-							<!-- <div class="bar">
-								<p> بإجابتك على بعض الأسئلة، سنساعدك على معرفة مدى قدرتك على الحصول على منحة دراسية. !
-								</p>
-							</div> -->
-							<!-- <div class="bar">
-								<p> وما هي النصائح التي يجب عليك اتباعها لزيادة فرصتك </p>
-							</div> -->
-							<div class="bar">
-								<button type="submit" class="btn-asses-submit btn-english-start" disabled>
+							<div class="col-sm-6">
+								<h1 class="home-header tertiary-color">English Proficiency Assessment</h1>
+								<h3 class="home-header-arabic prime-color">اختبار كفاءة اللغة الإنجليزية</h3>
+								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
+								<button type="submit" class="btn-test btn-asses-submit btn-english-start" disabled>
 									<span class="questions-loading">
 										<div class="lds-facebook">
 											<div></div>
@@ -139,20 +135,11 @@
 										</div>
 										Please wait until we get your questions ready...
 									</span>
-									<!-- Start -->
 								</button>
-
 							</div>
-							<!-- <span class="questions-loading">
-								<div class="lds-facebook">
-									<div></div>
-									<div></div>
-									<div></div>
-								</div>
-								Please wait until we get your questions ready...
-							</span> -->
 
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>
