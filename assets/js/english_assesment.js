@@ -158,7 +158,7 @@ var renderResult = function () {
   }
   else if (totalMark >= 16.66 && totalMark < 33.33) {
     message = "A2";
-    ringColor = "js-average-result"
+    ringColor = "js-average-result";
   }
   else if (totalMark < 16.66 && totalMark >= 0) {
     message = "A1";
