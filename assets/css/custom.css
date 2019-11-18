@@ -13262,8 +13262,6 @@ a {
     text-align: left;
 }
 
-
-
 .english-test-main {
     margin: 40px 0
 }
@@ -13271,7 +13269,7 @@ a {
 .js-q-box {
     padding: 0 80px;
     /* padding-left: 100px; */
-    margin: 65px 0;
+    margin: 75px 0;
 }
 
 .js-q-box:first-of-type {
@@ -13289,6 +13287,8 @@ a {
     .js-q-box {
         padding-right: 25px;
         padding-left: 25px;
+        margin: 55px 0;
+
     }
 }
 

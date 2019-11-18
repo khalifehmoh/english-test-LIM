@@ -123,8 +123,8 @@
 								<img class="img-main-image" src="https://lookinmena.com/wp-content/themes/lookinmena/assets/images/big_logo_test.png" alt="LookInMENA logo">
 							</div>
 							<div class="col-sm-6">
-								<h1 class="home-header tertiary-color">English Proficiency Assessment</h1>
-								<h3 class="home-header-arabic prime-color">اختبار كفاءة اللغة الإنجليزية</h3>
+								<h1 class="home-header prime-color">English Proficiency Assessment</h1>
+								<h3 class="home-header-arabic tertiary-color ">اختبار كفاءة اللغة الإنجليزية</h3>
 								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
 								<button type="submit" class="btn-test btn-asses-submit btn-english-start" disabled>
 									<span class="questions-loading">

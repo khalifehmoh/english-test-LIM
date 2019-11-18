@@ -141,27 +141,27 @@ var renderResult = function () {
   var percentage = totalMark;
 
   if (totalMark >= 83.335 && totalMark <= 100) {
-    message = "A1";
+    message = "C2";
     ringColor = "js-excellent-result";
   }
   else if (totalMark >= 66.668 && totalMark <= 83.335) {
-    message = "A2";
+    message = "C1";
     ringColor = "js-excellent-result";
   }
   else if (totalMark >= 50.001 && totalMark < 66.668) {
-    message = "B1";
+    message = "B2";
     ringColor = "js-verygood-result"
   }
   else if (totalMark >= 33.33 && totalMark < 50.001) {
-    message = "B2";
+    message = "B1";
     ringColor = "js-good-result"
   }
   else if (totalMark >= 16.66 && totalMark < 33.33) {
-    message = "C1";
+    message = "A2";
     ringColor = "js-average-result"
   }
   else if (totalMark < 16.66 && totalMark >= 0) {
-    message = "C2";
+    message = "A1";
     ringColor = "js-weak-result"
   }
 
