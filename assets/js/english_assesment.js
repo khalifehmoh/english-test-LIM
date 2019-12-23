@@ -4,6 +4,7 @@ var state = {
   totalQuestions: 0,
   pageQuestions: [],
   lastRenderedQuestion: 0,
+  feedbackSummary: '',
   allChecked: false,
   totalMarks: 0,
   tempMark: 0
@@ -18,6 +19,10 @@ var addQuestion = function (state, requiredQuestion, requiredChoices, requiredQu
     // questionIndex: 0,
   }
   state.pageQuestions.push(questionInfo);
+}
+
+var addFeedbackSummary = function (feedback) {
+  state.feedbackSummary = feedback;
 }
 
 var clearPageQuestions = function () {
@@ -139,6 +144,7 @@ var renderResult = function () {
   var totalMark = state.totalMarks;
   var message = "";
   var percentage = totalMark;
+  const feedbackSummary = state.feedbackSummary;
 
   if (totalMark >= 83.335 && totalMark <= 100) {
     message = "C2";
@@ -178,10 +184,23 @@ var renderResult = function () {
       a 15.9155 15.9155 0 0 1 0 -31.831" ; stroke-dasharray="${percentage}, 100" />
       <text x="18" y="20.35" class="js-result-message">${message}</text>
       </svg>
+    </div>
+    <div class="js-feedback-summary-con">
+      <div class="container">
+        <div class="js-feedback-box" style="direction: rtl;
+        text-align: right">
+          <img class="js-feedback-img" src="./wp-content/themes/lookinmena/assets/images/test-grants2.svg" alt="Nasooh lookinmena mascot">
+          <h5 class="js-feedback-summary-header">نصائح العم نصوح: </h5>
+          <div class="js-feedback-summary-list" style="padding: 20px 30px">${feedbackSummary}
+          </div>
+        </div>
+        <br>
+     </div>
     </div>`
     ;
   $(".js-container").html(result);
 }
+// 
 //event listeners
 
 function handleMarksDisplay() {
@@ -272,7 +291,7 @@ function handleViewResult() {
   $(".js-container").on("click", ".js-view-result", function (event) {
 
     $('.js-question-page').fadeOut('slow', function () {
-
+      generateFeedbackSummary();
       renderResult();
       animateResult();
     })
@@ -452,18 +471,23 @@ function handleProgressBar() {
   })(jQuery);
 }
 
-function handleViewResult() {
-  $(".js-container").on("click", ".js-view-result", function (event) {
-    $('.js-question-page').fadeOut('slow', function () {
-      renderResult();
-      animateResult();
-    })
+// function handleViewResult() {
+//   $(".js-container").on("click", ".js-view-result", function (event) {
+//     $('.js-question-page').fadeOut('slow', function () {
+//       renderResult();
+//       animateResult();
+//     })
 
-  })
-}
+//   })
+// }
 
 function animateResult() {
+  $(".js-feedback-header").hide()
   $(".result-ring").hide();
+  $(".js-feedback-summary-con").hide();
+  $(".js-feedback-img").hide();
+  $(".js-feedback-summary-header").hide();
+  $(".js-feedback-summary-list").hide();
   $(".js-container").animate({
     height: '300px'
   })
@@ -471,6 +495,34 @@ function animateResult() {
   setTimeout(() => {
     $(".result-ring").fadeIn(800);
   }, 500);
+  setTimeout(() => {
+    $(".js-container").animate({
+      height: '700px'
+    }, 2000, function () {
+      $(".js-container").css("height", "auto");
+    });
+    $(".js-feedback-summary-con").fadeIn(500).slideDown(1000, function () {
+      $(".js-feedback-img").fadeIn(200, function () {
+        $(".js-feedback-summary-header").fadeIn(200, function () {
+          $(".js-feedback-summary-list").fadeIn(500).slideDown(500)
+        });
+
+      });
+
+    });
+
+  }, 2000);
+  // $(".result-ring").hide();
+  // $(".js-container").animate({
+  //   height: '300px'
+  // })
+  // $(".js-feedback-header").fadeIn(800).slideDown();
+  // setTimeout(() => {
+  //   $(".result-ring").fadeIn(800);
+  // }, 500);
+
+
+
   // setTimeout(() => {
   //   $(".js-container").animate({
   //     height: '700px'
@@ -506,6 +558,56 @@ function getTenQuestionsDetails() {
   incrementLastRenderedQuestion();
 }
 
+function generateFeedbackSummary() {
+  const totalMark = state.totalMarks;
+  let feedbackText = '';
+  if (totalMark >= 66.668 && totalMark <= 100) {
+    // "excellent-result";
+    feedbackText = `<p>إذا كان مستواك متقدم، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية.</p></br>
+    <p>كورسات مستوى متقدم من أهم منصات التعليم الأونلاين:</p>
+    <p>Coursera: <a href="https://www.coursera.org/specializations/advanced-grammar-punctuation">https://www.coursera.org/specializations/advanced-grammar-punctuation<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/english-academic-study">https://www.futurelearn.com/courses/english-academic-study<br /><br /></a></p>
+    <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
+    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1">&nbsp;من هنا</a></p>
+    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1">&nbsp;من هنا</a></p>
+    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1">&nbsp;من هنا</a></p>
+    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop">&nbsp;من هنا</a></p>
+    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
+
+  }
+  else if (totalMark >= 33.33 && totalMark < 66.668) {
+    // "good-result"
+    feedbackText = `<p>إذا كان مستواك متوسط/ جيد، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية.</p></br>
+    <p>ثلاث كورسات مستوى متوسط/ جيد من أهم منصات التعليم الأونلاين:</p>
+    <p>edX: <a href="https://www.edx.org/course/upper-intermediate-english-business"> https://www.edx.org/course/upper-intermediate-english-business</a></p>
+    <p>Coursera: <a href="https://www.coursera.org/specializations/intermediate-grammar"> https://www.coursera.org/specializations/intermediate-grammar<br /></a>FutureLearn: <a href=" https://www.futurelearn.com/courses/english-for-study-intermediate">https://www.futurelearn.com/courses/english-for-study-intermediate<br /><br /></a></p>
+    <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
+    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1">&nbsp;من هنا</a></p>
+    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1">&nbsp;من هنا</a></p>
+    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1">&nbsp;من هنا</a></p>
+    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop">&nbsp;من هنا</a></p>
+    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate">&nbsp;من هنا</a>&nbsp;</p>
+    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games">الألعاب</a></p>
+    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
+
+  }
+  else if (totalMark < 33.33 && totalMark >= 0) {
+    // "weak-result"
+    feedbackText = `<p>إذا كان مستواك مبتدئ، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية. </p></br>
+    <p>ثلاث كورسات مستوى مبتدئ من أهم منصات التعليم الأونلاين:</p>
+    <p>edX: <a href="https://www.edx.org/course/english-grammar-and-style">https://www.edx.org/course/english-grammar-and-style</a></p>
+    <p>Coursera: <a href="https://www.coursera.org/specializations/learn-english">https://www.coursera.org/specializations/learn-english<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/basic-english-elementary">https://www.futurelearn.com/courses/basic-english-elementary<br /><br /></a></p>
+    <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
+    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1">&nbsp;من هنا</a></p>
+    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1">&nbsp;من هنا</a></p>
+    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1">&nbsp;من هنا</a></p>
+    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop">&nbsp;من هنا</a></p>
+    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate">&nbsp;من هنا</a>&nbsp;</p>
+    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games">الألعاب</a></p>
+    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
+  }
+  addFeedbackSummary(feedbackText);
+}
+
 function generateQuestionAnswersDOM(answersArray) {
   let answersDOMArray = [];
   answersArray.forEach(answer => {
@@ -538,7 +640,7 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 // Questions Repo
 function get_data() {
   var data = JSON.parse(globalData);
-  // var staticData = [{ "question": { "id": "54", "title": "____ do you have dinner?", "level": "medium", "mark": null }, "answers": [{ "id": "187", "title": "When time", "question_id": "54", "isRight": "0" }, { "id": "188", "title": "What time", "question_id": "54", "isRight": "1" }, { "id": "189", "title": "What kind of", "question_id": "54", "isRight": "0" }, { "id": "190", "title": "What for", "question_id": "54", "isRight": "0" }] }, { "question": { "id": "118", "title": "____ plans you might have for the weekend, you'll have to change them.", "level": "hard", "mark": null }, "answers": [{ "id": "443", "title": "Wherever", "question_id": "118", "isRight": "0" }, { "id": "444", "title": "Whovever", "question_id": "118", "isRight": "0" }, { "id": "445", "title": "Whatever", "question_id": "118", "isRight": "1" }, { "id": "446", "title": "However", "question_id": "118", "isRight": "0" }] }, { "question": { "id": "122", "title": "The party was so boring I wish I ____ there at all.", "level": "hard", "mark": null }, "answers": [{ "id": "459", "title": "hadn't gone", "question_id": "122", "isRight": "1" }, { "id": "460", "title": "wouldn't go", "question_id": "122", "isRight": "0" }, { "id": "461", "title": "haven't gone", "question_id": "122", "isRight": "0" }, { "id": "462", "title": "didn't go", "question_id": "122", "isRight": "0" }] }, { "question": { "id": "15", "title": "I didn't know you wanted _________________ Robert to your party.", "level": "easy", "mark": null }, "answers": [{ "id": "43", "title": "that I invite", "question_id": "15", "isRight": "0" }, { "id": "44", "title": "me to invite", "question_id": "15", "isRight": "1" }, { "id": "45", "title": "that I invited", "question_id": "15", "isRight": "0" }] }, { "question": { "id": "83", "title": "Her horse is lovely. She _____ it since she was a teenager.", "level": "medium", "mark": null }, "answers": [{ "id": "303", "title": "had", "question_id": "83", "isRight": "0" }, { "id": "304", "title": "has had", "question_id": "83", "isRight": "1" }, { "id": "305", "title": "had", "question_id": "83", "isRight": "0" }, { "id": "306", "title": "is had", "question_id": "83", "isRight": "0" }] }, { "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }, { "question": { "id": "46", "title": "When do you play tennis? ____ Mondays.", "level": "easy", "mark": null }, "answers": [{ "id": "155", "title": "On", "question_id": "46", "isRight": "1" }, { "id": "156", "title": "In", "question_id": "46", "isRight": "0" }, { "id": "157", "title": "At", "question_id": "46", "isRight": "0" }, { "id": "158", "title": "By", "question_id": "46", "isRight": "0" }] }, { "question": { "id": "48", "title": "____ two airports in the city.", "level": "easy", "mark": null }, "answers": [{ "id": "163", "title": "It is", "question_id": "48", "isRight": "0" }, { "id": "164", "title": "There is", "question_id": "48", "isRight": "0" }, { "id": "165", "title": "There are", "question_id": "48", "isRight": "1" }, { "id": "166", "title": "This is", "question_id": "48", "isRight": "0" }] }, { "question": { "id": "9", "title": "You _________________ write the report today. The deadline is May 26th", "level": "easy", "mark": null }, "answers": [{ "id": "25", "title": "mustn\u2019t", "question_id": "9", "isRight": "0" }, { "id": "26", "title": "haven\u2019t to", "question_id": "9", "isRight": "0" }, { "id": "27", "title": "don\u2019t have to", "question_id": "9", "isRight": "1" }] }, { "question": { "id": "69", "title": "I plan to ____ two weeks by the beach.", "level": "medium", "mark": null }, "answers": [{ "id": "247", "title": "bring", "question_id": "69", "isRight": "0" }, { "id": "248", "title": "spend", "question_id": "69", "isRight": "1" }, { "id": "249", "title": "spending", "question_id": "69", "isRight": "0" }, { "id": "250", "title": "making", "question_id": "69", "isRight": "0" }] }, { "question": { "id": "24", "title": "They've had this house _________________ twenty years", "level": "easy", "mark": null }, "answers": [{ "id": "70", "title": "from", "question_id": "24", "isRight": "0" }, { "id": "71", "title": "for", "question_id": "24", "isRight": "1" }, { "id": "72", "title": "since", "question_id": "24", "isRight": "0" }] }, { "question": { "id": "77", "title": "In the future there ____ cures to the world's worst diseases.", "level": "medium", "mark": null }, "answers": [{ "id": "279", "title": "might be", "question_id": "77", "isRight": "1" }, { "id": "280", "title": "is going to being", "question_id": "77", "isRight": "0" }, { "id": "281", "title": "will being", "question_id": "77", "isRight": "0" }, { "id": "282", "title": "might have", "question_id": "77", "isRight": "0" }] }, { "question": { "id": "140", "title": "I'll need to have the stairs ____.", "level": "hard", "mark": null }, "answers": [{ "id": "531", "title": "renovate", "question_id": "140", "isRight": "0" }, { "id": "532", "title": "renovating", "question_id": "140", "isRight": "0" }, { "id": "533", "title": "to renovate", "question_id": "140", "isRight": "0" }, { "id": "534", "title": "renovated", "question_id": "140", "isRight": "1" }] }, { "question": { "id": "78", "title": "The space tourists ___ certainly need to be very fit.", "level": "medium", "mark": null }, "answers": [{ "id": "283", "title": "won\u2019t", "question_id": "78", "isRight": "0" }, { "id": "284", "title": "will", "question_id": "78", "isRight": "1" }, { "id": "285", "title": "?", "question_id": "78", "isRight": "0" }, { "id": "286", "title": "going to", "question_id": "78", "isRight": "0" }] }, { "question": { "id": "76", "title": "I don't think you ____ them.", "level": "medium", "mark": null }, "answers": [{ "id": "275", "title": "should to email", "question_id": "76", "isRight": "0" }, { "id": "276", "title": "should email", "question_id": "76", "isRight": "1" }, { "id": "277", "title": "should emailing", "question_id": "76", "isRight": "0" }, { "id": "278", "title": "?", "question_id": "76", "isRight": "0" }] }, { "question": { "id": "54", "title": "____ do you have dinner?", "level": "medium", "mark": null }, "answers": [{ "id": "187", "title": "When time", "question_id": "54", "isRight": "0" }, { "id": "188", "title": "What time", "question_id": "54", "isRight": "1" }, { "id": "189", "title": "What kind of", "question_id": "54", "isRight": "0" }, { "id": "190", "title": "What for", "question_id": "54", "isRight": "0" }] }, { "question": { "id": "118", "title": "____ plans you might have for the weekend, you'll have to change them.", "level": "hard", "mark": null }, "answers": [{ "id": "443", "title": "Wherever", "question_id": "118", "isRight": "0" }, { "id": "444", "title": "Whovever", "question_id": "118", "isRight": "0" }, { "id": "445", "title": "Whatever", "question_id": "118", "isRight": "1" }, { "id": "446", "title": "However", "question_id": "118", "isRight": "0" }] }, { "question": { "id": "122", "title": "The party was so boring I wish I ____ there at all.", "level": "hard", "mark": null }, "answers": [{ "id": "459", "title": "hadn't gone", "question_id": "122", "isRight": "1" }, { "id": "460", "title": "wouldn't go", "question_id": "122", "isRight": "0" }, { "id": "461", "title": "haven't gone", "question_id": "122", "isRight": "0" }, { "id": "462", "title": "didn't go", "question_id": "122", "isRight": "0" }] }, { "question": { "id": "15", "title": "I didn't know you wanted _________________ Robert to your party.", "level": "easy", "mark": null }, "answers": [{ "id": "43", "title": "that I invite", "question_id": "15", "isRight": "0" }, { "id": "44", "title": "me to invite", "question_id": "15", "isRight": "1" }, { "id": "45", "title": "that I invited", "question_id": "15", "isRight": "0" }] }, { "question": { "id": "83", "title": "Her horse is lovely. She _____ it since she was a teenager.", "level": "medium", "mark": null }, "answers": [{ "id": "303", "title": "had", "question_id": "83", "isRight": "0" }, { "id": "304", "title": "has had", "question_id": "83", "isRight": "1" }, { "id": "305", "title": "had", "question_id": "83", "isRight": "0" }, { "id": "306", "title": "is had", "question_id": "83", "isRight": "0" }] }, { "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }]
+  var staticData = [{ "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }]
   state.questionsData = data;
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
