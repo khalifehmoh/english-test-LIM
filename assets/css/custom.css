@@ -13005,6 +13005,7 @@ input:checked+.slide-container .nav label {
     margin: 10px auto;
     max-width: 50%;
     max-height: 125px;
+    margin-bottom: 30px;
 }
 
 .ring {
@@ -13489,3 +13490,121 @@ a {
         height: 150px;
     }
 }
+
+/* panel-group new design */
+/* use accordion-2 id with .panel-group in order to use this component */
+.panel-group#accordion-2 {
+    /* background: #f1f1f1 */
+
+}
+
+.panel-group#accordion-2 .panel {
+    background: #f1f1f1;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.panel-group#accordion-2 .panel .panel-title a {
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 20px;
+    height: 35px;
+    margin-bottom: 0;
+    color: var(--tertiary-btn-color);
+}
+
+.panel-group#accordion-2 .panel .panel-title a:hover {
+    color: white;
+    background: var(--medium-grey-color)
+}
+
+.panel-group#accordion-2 .panel .panel-title a:before {
+    position: static;
+    margin-left: 7px;
+}
+
+.panel-group#accordion-2 .panel .panel-body {
+    color: #585858;
+}
+
+/**/
+.main-uni-info {
+    border-radius: 20px;
+    background: #f1f1f1;
+    padding: 20px 0px;
+    margin-bottom: 20px;
+}
+
+.key-value-chip {
+    background: #9c9c9c;
+    text-align: center;
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 720px) {
+    .key-value-chip {
+        margin-bottom: 15px;
+    }
+}
+
+.key-value-chip .key {
+    background: #E6E6E6;
+    border-radius: 20px;
+    color: var(--tertiary-btn-color);
+    padding: 5px 0;
+}
+
+.key-value-chip .value {
+    color: white;
+    border-radius: 20px;
+}
+
+.UnHeader,
+.unHeaderSmall {
+    color: var(--primary-color);
+}
+
+.hrefAdvice {
+    color: var(--primary-color);
+}
+
+.hrefAdvice:hover {
+    color: var(--primary-color);
+}
+
+.articleIcon {
+    color: var(--primary-color);
+
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.map-story.story {
+    margin: 0;
+}
+
+.panel-title a:hover,
+.panel-title a[aria-expanded="true"] {
+    background-color: #9c9c9c;
+    color: #fff !important;
+}
+
+/* .no-padding {
+    padding: 0;
+} */
+
+
+
+/* .panel-group#accordion-2 .panel .panel-body strong {
+    color: var(--dark-grey-color);
+} */
+
+/* 
+--dark-grey-color: #2d2d2d;
+
+    --medium-grey-color: #787676;
+
+    --light-grey-color: #dfdfdf; */

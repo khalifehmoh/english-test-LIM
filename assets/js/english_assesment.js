@@ -7,7 +7,10 @@ var state = {
   feedbackSummary: '',
   allChecked: false,
   totalMarks: 0,
-  tempMark: 0
+  tempMark: 0,
+  startingTime: '',
+  endTime: '',
+  testTime: ''
 }
 
 //state modification functions
@@ -35,6 +38,26 @@ var addNumberOfQuestions = function (state, total) {
 
 var choicesCheck = function (status) {
   state.allChecked = status;
+}
+
+var setStartEndTime = function (type) {
+  if (type === 'start') {
+    state.startingTime = new Date().getTime();
+  }
+  else {
+    state.endTime = new Date().getTime();
+  }
+}
+
+var setTestTime = function () {
+  const endTime = state.endTime;
+  const startTime = state.startingTime;
+  const diff = Math.abs(endTime - startTime);
+  var hours = Math.floor((diff % (1000 * 60 * 60 * 60)) / (1000 * 60 * 60));
+  var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  state.testTime = hours + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
 }
 
 var changeTempMark = function (mark) {
@@ -80,7 +103,7 @@ var renderMainDetails = function (state) {
     <h2 class="js-q-header tertiary-color">English Assessment</h2>
     <div class="bar-con">
       <div class="bar-sub-con">
-      <span style="width:100%; text-align: left;">Progress:</span>
+        <span style="width:100%; text-align: left;">Progress:</span>
         <div id="bar1" class="barfiller">
           <div class="tipWrap">
             <span class="tip"></span>
@@ -91,14 +114,14 @@ var renderMainDetails = function (state) {
     </div>
     <div class="js-questions-content">
     </div>
-  </div>`
+  </div > `
   $(".js-container").html(questionsPageRender);
 
 }
 
 var renderQuestion = function (state) {
   var checkLastAnswer = function () {
-    return `<button type="submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">Next</button>`
+    return `< button type = "submit" ${state.allChecked ? "" : "disabled"} class=\"btn-test js-choice-submit-button\">Next</button>`
   }
   var checkLastAnswer = function () {
     if (state.lastRenderedQuestion >= state.totalQuestions) {
@@ -173,7 +196,7 @@ var renderResult = function () {
 
   result = `<div class="js-result-page">
     <div class="js-feedback-text-con">
-    <span class="js-feedback-header">Your Result: ${totalMark}/100</span>
+    <span class="js-feedback-header">نتيجتك: ${totalMark}/100</span>
     <div>
       <svg viewBox="0 0 36 36" class="result-ring ${ringColor}">
       <path class="ring-bg" d="M18 2.0845
@@ -185,11 +208,14 @@ var renderResult = function () {
       <text x="18" y="20.35" class="js-result-message">${message}</text>
       </svg>
     </div>
+    <div class="js-feedback-time-con" style="text-align:center">
+    <span class="js-feedback-time">مدة الإنهاء: ${state.testTime}</span>
+    </div>
     <div class="js-feedback-summary-con">
       <div class="container">
         <div class="js-feedback-box" style="direction: rtl;
         text-align: right">
-          <img class="js-feedback-img" src="./wp-content/themes/lookinmena/assets/images/test-grants2.svg" alt="Nasooh lookinmena mascot">
+          <img class="js-feedback-img" src="../wp-content/themes/lookinmena/assets/images/test-grants2.svg" alt="Nasooh lookinmena mascot">
           <h5 class="js-feedback-summary-header">نصائح العم نصوح: </h5>
           <div class="js-feedback-summary-list" style="padding: 20px 30px">${feedbackSummary}
           </div>
@@ -217,6 +243,7 @@ function handleStartQuiz() {
   $(".js-container").on("click", ".btn-asses-submit", function (event) {
     event.preventDefault();
     get_data();
+    setStartEndTime('start');
 
     // var index = state.questionInfo.questionIndex;
     $('.home-container').fadeOut('medium', function () {
@@ -289,7 +316,8 @@ function handleChoiceCheck() {
 
 function handleViewResult() {
   $(".js-container").on("click", ".js-view-result", function (event) {
-
+    setStartEndTime('end');
+    setTestTime();
     $('.js-question-page').fadeOut('slow', function () {
       generateFeedbackSummary();
       renderResult();
@@ -486,6 +514,7 @@ function animateResult() {
   $(".result-ring").hide();
   $(".js-feedback-summary-con").hide();
   $(".js-feedback-img").hide();
+  $(".js-feedback-time-con").hide();
   $(".js-feedback-summary-header").hide();
   $(".js-feedback-summary-list").hide();
   $(".js-container").animate({
@@ -494,6 +523,8 @@ function animateResult() {
   $(".js-feedback-header").fadeIn(800).slideDown();
   setTimeout(() => {
     $(".result-ring").fadeIn(800);
+    $(".js-feedback-time-con").fadeIn(1200);
+
   }, 500);
   setTimeout(() => {
     $(".js-container").animate({
@@ -565,45 +596,45 @@ function generateFeedbackSummary() {
     // "excellent-result";
     feedbackText = `<p>إذا كان مستواك متقدم، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية.</p></br>
     <p>كورسات مستوى متقدم من أهم منصات التعليم الأونلاين:</p>
-    <p>Coursera: <a href="https://www.coursera.org/specializations/advanced-grammar-punctuation">https://www.coursera.org/specializations/advanced-grammar-punctuation<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/english-academic-study">https://www.futurelearn.com/courses/english-academic-study<br /><br /></a></p>
+    <p>Coursera: <a href="https://www.coursera.org/specializations/advanced-grammar-punctuation" target="_blank">https://www.coursera.org/specializations/advanced-grammar-punctuation<br /></a>FutureLearn: <a  href="https://www.futurelearn.com/courses/english-academic-study" target="_blank">https://www.futurelearn.com/courses/english-academic-study<br /><br /></a></p>
     <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
-    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1">&nbsp;من هنا</a></p>
-    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1">&nbsp;من هنا</a></p>
-    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1">&nbsp;من هنا</a></p>
-    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop">&nbsp;من هنا</a></p>
-    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
+    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop" target="_blank">&nbsp;من هنا</a></p>
+    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/" target="_blank">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
 
   }
   else if (totalMark >= 33.33 && totalMark < 66.668) {
     // "good-result"
     feedbackText = `<p>إذا كان مستواك متوسط/ جيد، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية.</p></br>
     <p>ثلاث كورسات مستوى متوسط/ جيد من أهم منصات التعليم الأونلاين:</p>
-    <p>edX: <a href="https://www.edx.org/course/upper-intermediate-english-business"> https://www.edx.org/course/upper-intermediate-english-business</a></p>
-    <p>Coursera: <a href="https://www.coursera.org/specializations/intermediate-grammar"> https://www.coursera.org/specializations/intermediate-grammar<br /></a>FutureLearn: <a href=" https://www.futurelearn.com/courses/english-for-study-intermediate">https://www.futurelearn.com/courses/english-for-study-intermediate<br /><br /></a></p>
+    <p>edX: <a href="https://www.edx.org/course/upper-intermediate-english-business" target="_blank"> https://www.edx.org/course/upper-intermediate-english-business</a></p>
+    <p>Coursera: <a href="https://www.coursera.org/specializations/intermediate-grammar" target="_blank"> https://www.coursera.org/specializations/intermediate-grammar<br /></a>FutureLearn: <a href=" https://www.futurelearn.com/courses/english-for-study-intermediate" target="_blank">https://www.futurelearn.com/courses/english-for-study-intermediate<br /><br /></a></p>
     <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
-    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1">&nbsp;من هنا</a></p>
-    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1">&nbsp;من هنا</a></p>
-    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1">&nbsp;من هنا</a></p>
-    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop">&nbsp;من هنا</a></p>
-    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate">&nbsp;من هنا</a>&nbsp;</p>
-    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games">الألعاب</a></p>
-    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
+    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop" target="_blank">&nbsp;من هنا</a></p>
+    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا</a>&nbsp;</p>
+    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone" target="_blank">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone" target="_blank">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine" target="_blank">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories" target="_blank">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games" target="_blank">الألعاب</a></p>
+    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/" target="_blank">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
 
   }
   else if (totalMark < 33.33 && totalMark >= 0) {
     // "weak-result"
     feedbackText = `<p>إذا كان مستواك مبتدئ، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية. </p></br>
     <p>ثلاث كورسات مستوى مبتدئ من أهم منصات التعليم الأونلاين:</p>
-    <p>edX: <a href="https://www.edx.org/course/english-grammar-and-style">https://www.edx.org/course/english-grammar-and-style</a></p>
-    <p>Coursera: <a href="https://www.coursera.org/specializations/learn-english">https://www.coursera.org/specializations/learn-english<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/basic-english-elementary">https://www.futurelearn.com/courses/basic-english-elementary<br /><br /></a></p>
+    <p>edX: <a href="https://www.edx.org/course/english-grammar-and-style" target="_blank">https://www.edx.org/course/english-grammar-and-style</a></p>
+    <p>Coursera: <a href="https://www.coursera.org/specializations/learn-english" target="_blank">https://www.coursera.org/specializations/learn-english<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/basic-english-elementary" target="_blank">https://www.futurelearn.com/courses/basic-english-elementary<br /><br /></a></p>
     <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
-    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1">&nbsp;من هنا</a></p>
-    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1">&nbsp;من هنا</a></p>
-    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1">&nbsp;من هنا</a></p>
-    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop">&nbsp;من هنا</a></p>
-    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate">&nbsp;من هنا</a>&nbsp;</p>
-    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games">الألعاب</a></p>
-    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
+    <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>القراءة <a href="https://learnenglish.britishcouncil.org/skills/reading/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>الكتابة <a href="https://learnenglish.britishcouncil.org/skills/writing/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
+    <p>المحادثة <a href="https://learnenglish.britishcouncil.org/skills/speaking/a1-beginner-at-the-shop" target="_blank">&nbsp;من هنا</a></p>
+    <p>&nbsp;المفردات <a href="https://learnenglish.britishcouncil.org/vocabulary/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا</a>&nbsp;</p>
+    <p>القواعد <a href="https://learnenglish.britishcouncil.org/grammar/beginner-to-pre-intermediate" target="_blank">&nbsp;من هنا<br /><br /></a>كما ننصحك بتقوية لغتك من خلال بعض الأمور المسلية مثل: الاستماع إلى <a href="https://learnenglish.britishcouncil.org/general-english/audio-zone" target="_blank">مقاطع صوتية</a> و <a href="https://learnenglish.britishcouncil.org/general-english/video-zone" target="_blank">مقاطع فيديو</a> وقراءة <a href="https://learnenglish.britishcouncil.org/general-english/magazine" target="_blank">المجلات</a> و<a href="https://learnenglish.britishcouncil.org/general-english/stories" target="_blank">القصص</a> و <a href="https://learnenglish.britishcouncil.org/general-english/games" target="_blank">الألعاب</a></p>
+    <p><br />وفي الختام نقدم لك <a href="https://lookinmena.com/%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84-%d9%84%d8%aa%d8%b9%d9%84%d9%91%d9%85-%d8%a7%d9%84%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%83%d9%84%d9%8a%d8%b2%d9%8a/" target="_blank">دليل لوك أن مين</a>ا لتعلم اللغة الانجليزية لكافة المستويات.</p>`
   }
   addFeedbackSummary(feedbackText);
 }
@@ -639,9 +670,9 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 
 // Questions Repo
 function get_data() {
-  var data = JSON.parse(globalData);
+  // var data = JSON.parse(globalData);
   var staticData = [{ "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }]
-  state.questionsData = data;
+  state.questionsData = staticData;
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }
