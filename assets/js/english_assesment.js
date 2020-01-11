@@ -112,6 +112,7 @@ var renderMainDetails = function (state) {
         </div>
       </div>
     </div>
+
     <div class="js-questions-content">
     </div>
   </div > `
@@ -193,21 +194,25 @@ var renderResult = function () {
     message = "A1";
     ringColor = "js-weak-result"
   }
+  // ${ringColor}
 
   result = `<div class="js-result-page">
     <div class="js-feedback-text-con">
     <span class="js-feedback-header">نتيجتك: ${totalMark}/100</span>
     <div>
-      <svg viewBox="0 0 36 36" class="result-ring ${ringColor}">
+      <svg viewBox="0 0 36 36" class="result-ring english-result-ring">
       <path class="ring-bg" d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831" />
       <path class="ring" d="M18 2.0845
       a 15.9155 15.9155 0 0 1 0 31.831
       a 15.9155 15.9155 0 0 1 0 -31.831" ; stroke-dasharray="${percentage}, 100" />
-      <text x="18" y="20.35" class="js-result-message">${message}</text>
+      <text x="18" y="20.35" class="js-result-message js-english-message-result">${message}</text>
       </svg>
     </div>
+
+    <div id="steps"></div>
+
     <div class="js-feedback-time-con" style="text-align:center">
     <span class="js-feedback-time">مدة الإنهاء: ${state.testTime}</span>
     </div>
@@ -321,6 +326,7 @@ function handleViewResult() {
     $('.js-question-page').fadeOut('slow', function () {
       generateFeedbackSummary();
       renderResult();
+      $('#steps').progressbar({ steps: ['A2', 'A1', '@B2', 'B1', 'C2', 'C1'] });
       animateResult();
     })
 
@@ -497,6 +503,49 @@ function handleProgressBar() {
     };
 
   })(jQuery);
+}
+
+function handleResultBar() {
+
+  (function ($) {
+    $.fn.progressbar = function (options) {
+
+      var opts = $.extend({}, options);
+
+      return this.each(function () {
+        var $this = $(this);
+
+        var $ul = $('<ul>').attr('class', 'progressbar');
+
+        var currentIdx = -1
+
+        $.each(opts.steps, function (index, value) {
+          var $li = $('<li>').text(value.replace('@', '').replace('~', ''));
+          $li.css('width', (100 / opts.steps.length) + '%');
+
+
+
+          if (value.indexOf('@') > -1) {
+            $li.addClass('current');
+            currentIdx = index;
+          }
+
+          if (value.indexOf('~') > -1) {
+            $li.addClass('fail');
+          }
+
+          $ul.append($li);
+        });
+
+        for (var i = 0; i < currentIdx; i++) {
+          $($ul.find('li')[i]).addClass('done');
+        }
+
+        $this.append($ul);
+      });
+    };
+  })(jQuery);
+
 }
 
 // function handleViewResult() {
@@ -683,6 +732,7 @@ $(function () {
   handleChoiceCheck();
   handleSubmitAnswers();
   handleViewResult();
-  handleProgressBar()
+  handleProgressBar();
+  handleResultBar()
 })
 

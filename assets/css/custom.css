@@ -13592,6 +13592,105 @@ a {
     color: #fff !important;
 }
 
+.result-ring.english-result-ring {
+    stroke: rgb(104, 191, 250);
+}
+
+.js-english-message-result {
+    color: var(--tertiary-btn-color);
+}
+
+ul.progressbar {
+    height: 75px;
+    padding: 0;
+    counter-reset: step;
+}
+
+ul.progressbar li {
+    list-style-type: none;
+    color: rgb(0, 0, 0);
+    float: left;
+    position: relative;
+    text-align: center;
+    font-size: 16px;
+}
+
+ul.progressbar li {
+    color: #9e9e9e;
+}
+
+ul.progressbar li:before {
+    content: '';
+    color: #333;
+    width: 20px;
+    height: 20px;
+    /* line-height: 20px; */
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    margin: 8px auto 10px auto;
+    background: rgb(216, 216, 216);
+}
+
+ul.progressbar li:after {
+    content: "";
+    background: #ddd;
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    top: 14px;
+    right: -50%;
+    z-index: -1;
+}
+
+ul.progressbar li:last-child:after {
+    content: none;
+}
+
+ul.progressbar li.done {
+    color: rgb(21, 219, 158);
+}
+
+ul.progressbar li.current {
+    font-size: 22px;
+    color: var(--tertiary-btn-color);
+}
+
+ul.progressbar li.current:before {
+    content: '\2605';
+    color: white;
+    width: 32px;
+    height: 32px;
+    /* line-height: 20px; */
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    margin: 3px auto 10px auto;
+    background: rgb(216, 216, 216);
+}
+
+ul.progressbar li.done:before,
+ul.progressbar li.done:after {
+    background: rgb(21, 219, 158);
+    color: #fff;
+
+}
+
+ul.progressbar li.current:before {
+    background: rgb(104, 191, 250);
+    color: #fff;
+}
+
+
+ul.progressbar li.current:before {
+    background: rgb(104, 191, 250);
+    color: #fff;
+}
+
+ul.progressbar li.fail:before {
+    background: rgb(229, 48, 40)
+}
+
 /* .no-padding {
     padding: 0;
 } */
