@@ -13592,12 +13592,19 @@ a {
     color: #fff !important;
 }
 
-.result-ring.english-result-ring {
-    stroke: rgb(104, 191, 250);
+.result-ring.english-result-ring .js-result-message {
+    font-weight: 800;
+    fill: var(--tertiary-btn-color);
+    font-size: 0.5em;
+    font-family: inherit;
 }
 
-.js-english-message-result {
-    color: var(--tertiary-btn-color);
+.result-ring.english-result-ring .ring {
+    stroke: rgb(104, 191, 250);
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: butt;
+    animation: progress 1s ease-out forwards;
 }
 
 ul.progressbar {
@@ -13652,7 +13659,8 @@ ul.progressbar li.done {
 }
 
 ul.progressbar li.current {
-    font-size: 22px;
+    font-size: 19px;
+    font-weight: 700;
     color: var(--tertiary-btn-color);
 }
 

@@ -10,7 +10,9 @@ var state = {
   tempMark: 0,
   startingTime: '',
   endTime: '',
-  testTime: ''
+  testTime: '',
+  result: '',
+  levelText: ''
 }
 
 //state modification functions
@@ -26,6 +28,10 @@ var addQuestion = function (state, requiredQuestion, requiredChoices, requiredQu
 
 var addFeedbackSummary = function (feedback) {
   state.feedbackSummary = feedback;
+}
+
+var addResultMessage = function (result) {
+  state.result = result;
 }
 
 var clearPageQuestions = function () {
@@ -168,6 +174,7 @@ var renderResult = function () {
   var totalMark = state.totalMarks;
   var message = "";
   var percentage = totalMark;
+  const levelText = state.levelText;
   const feedbackSummary = state.feedbackSummary;
 
   if (totalMark >= 83.335 && totalMark <= 100) {
@@ -194,6 +201,7 @@ var renderResult = function () {
     message = "A1";
     ringColor = "js-weak-result"
   }
+  addResultMessage(message);
   // ${ringColor}
 
   result = `<div class="js-result-page">
@@ -213,8 +221,12 @@ var renderResult = function () {
 
     <div id="steps"></div>
 
-    <div class="js-feedback-time-con" style="text-align:center">
-    <span class="js-feedback-time">مدة الإنهاء: ${state.testTime}</span>
+    <div id="result-level-text" style="text-align:center;margin: 20 0 5px">
+      <p style="font-weight: 700;font-size: 1.1em;">${levelText}</p>
+    </div>
+
+    <div class="js-feedback-time-con" style="text-align:center;margin-bottom: 30px">
+    <span class="js-feedback-time" style="font-size:1.15em;color: #5a5a5a;">مدة الإنهاء: ${state.testTime}</span>
     </div>
     <div class="js-feedback-summary-con">
       <div class="container">
@@ -231,6 +243,7 @@ var renderResult = function () {
     ;
   $(".js-container").html(result);
 }
+// src="../wp-content/themes/lookinmena/assets/images/test-grants2.svg"
 // 
 //event listeners
 
@@ -301,10 +314,7 @@ function handleSubmitAnswers() {
     }
     else {
       $('.js-container').css("height", "420px");
-
-      $([document.documentElement, document.body]).animate({
-        scrollTop: 0
-      }, 1000);
+      window.scrollTo(0, 0);
     }
   })
 }
@@ -326,11 +336,22 @@ function handleViewResult() {
     $('.js-question-page').fadeOut('slow', function () {
       generateFeedbackSummary();
       renderResult();
-      $('#steps').progressbar({ steps: ['A2', 'A1', '@B2', 'B1', 'C2', 'C1'] });
+      $('#steps').progressbar({ steps: setResultStep() });
       animateResult();
     })
 
   })
+}
+
+function setResultStep() {
+  let levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  let resultLevel = state.result;
+  levels.forEach((level, index) => {
+    if (level === resultLevel) {
+      levels[index] = '@' + level
+    }
+  });
+  return levels
 }
 
 function handleProgressBar() {
@@ -566,13 +587,14 @@ function animateResult() {
   $(".js-feedback-time-con").hide();
   $(".js-feedback-summary-header").hide();
   $(".js-feedback-summary-list").hide();
+  $("#steps").hide();
+  $("#result-level-text").hide();
   $(".js-container").animate({
     height: '300px'
   })
   $(".js-feedback-header").fadeIn(800).slideDown();
   setTimeout(() => {
     $(".result-ring").fadeIn(800);
-    $(".js-feedback-time-con").fadeIn(1200);
 
   }, 500);
   setTimeout(() => {
@@ -581,7 +603,10 @@ function animateResult() {
     }, 2000, function () {
       $(".js-container").css("height", "auto");
     });
-    $(".js-feedback-summary-con").fadeIn(500).slideDown(1000, function () {
+    $("#result-level-text").fadeIn(1000);
+    $("#steps").fadeIn(1200);
+    $(".js-feedback-time-con").fadeIn(2000);
+    $(".js-feedback-summary-con").fadeIn(1000).slideDown(2000, function () {
       $(".js-feedback-img").fadeIn(200, function () {
         $(".js-feedback-summary-header").fadeIn(200, function () {
           $(".js-feedback-summary-list").fadeIn(500).slideDown(500)
@@ -592,24 +617,6 @@ function animateResult() {
     });
 
   }, 2000);
-  // $(".result-ring").hide();
-  // $(".js-container").animate({
-  //   height: '300px'
-  // })
-  // $(".js-feedback-header").fadeIn(800).slideDown();
-  // setTimeout(() => {
-  //   $(".result-ring").fadeIn(800);
-  // }, 500);
-
-
-
-  // setTimeout(() => {
-  //   $(".js-container").animate({
-  //     height: '700px'
-  //   }, 2000, function () {
-  //     $(".js-container").css("height", "auto");
-  //   });
-  // }, 2000);
 }
 
 //other functions
@@ -643,8 +650,8 @@ function generateFeedbackSummary() {
   let feedbackText = '';
   if (totalMark >= 66.668 && totalMark <= 100) {
     // "excellent-result";
-    feedbackText = `<p>إذا كان مستواك متقدم، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية.</p></br>
-    <p>كورسات مستوى متقدم من أهم منصات التعليم الأونلاين:</p>
+    state.levelText = 'مستواك متقدم'
+    feedbackText = `<p>كورسات مستوى متقدم من أهم منصات التعليم الأونلاين:</p>
     <p>Coursera: <a href="https://www.coursera.org/specializations/advanced-grammar-punctuation" target="_blank">https://www.coursera.org/specializations/advanced-grammar-punctuation<br /></a>FutureLearn: <a  href="https://www.futurelearn.com/courses/english-academic-study" target="_blank">https://www.futurelearn.com/courses/english-academic-study<br /><br /></a></p>
     <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
     <p>الاستماع <a href="https://learnenglish.britishcouncil.org/skills/listening/beginner-a1" target="_blank">&nbsp;من هنا</a></p>
@@ -656,8 +663,8 @@ function generateFeedbackSummary() {
   }
   else if (totalMark >= 33.33 && totalMark < 66.668) {
     // "good-result"
-    feedbackText = `<p>إذا كان مستواك متوسط/ جيد، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية.</p></br>
-    <p>ثلاث كورسات مستوى متوسط/ جيد من أهم منصات التعليم الأونلاين:</p>
+    state.levelText = 'مستواك متوسط/ جيد';
+    feedbackText = `<p>ثلاث كورسات مستوى متوسط/ جيد من أهم منصات التعليم الأونلاين:</p>
     <p>edX: <a href="https://www.edx.org/course/upper-intermediate-english-business" target="_blank"> https://www.edx.org/course/upper-intermediate-english-business</a></p>
     <p>Coursera: <a href="https://www.coursera.org/specializations/intermediate-grammar" target="_blank"> https://www.coursera.org/specializations/intermediate-grammar<br /></a>FutureLearn: <a href=" https://www.futurelearn.com/courses/english-for-study-intermediate" target="_blank">https://www.futurelearn.com/courses/english-for-study-intermediate<br /><br /></a></p>
     <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
@@ -672,8 +679,8 @@ function generateFeedbackSummary() {
   }
   else if (totalMark < 33.33 && totalMark >= 0) {
     // "weak-result"
-    feedbackText = `<p>إذا كان مستواك مبتدئ، سنقدم لك عدة نصائح لتقوية لغتك الانجليزية. </p></br>
-    <p>ثلاث كورسات مستوى مبتدئ من أهم منصات التعليم الأونلاين:</p>
+    state.levelText = ' مستواك مبتدئ';
+    feedbackText = `<p>ثلاث كورسات مستوى مبتدئ من أهم منصات التعليم الأونلاين:</p>
     <p>edX: <a href="https://www.edx.org/course/english-grammar-and-style" target="_blank">https://www.edx.org/course/english-grammar-and-style</a></p>
     <p>Coursera: <a href="https://www.coursera.org/specializations/learn-english" target="_blank">https://www.coursera.org/specializations/learn-english<br /></a>FutureLearn: <a href="https://www.futurelearn.com/courses/basic-english-elementary" target="_blank">https://www.futurelearn.com/courses/basic-english-elementary<br /><br /></a></p>
     <p>يتيح لك موقع British Council الفرصة لتقوية مهاراتك من خلال الروابط التالية:<br /></p>
@@ -719,9 +726,9 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 
 // Questions Repo
 function get_data() {
-  // var data = JSON.parse(globalData);
-  var staticData = [{ "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }]
-  state.questionsData = staticData;
+  var data = JSON.parse(globalData);
+  // var staticData = [{ "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }]
+  state.questionsData = data;
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }

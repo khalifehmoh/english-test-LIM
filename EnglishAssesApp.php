@@ -59,11 +59,12 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				height: 100%
+				padding: 35px 0;
+				/* height: 100% */
 			}
 
 			.home-sub-con {
-				padding: 0 75px;
+				padding: 0 35px;
 				width: 100%;
 			}
 
@@ -124,8 +125,15 @@
 							</div>
 							<div class="col-sm-6">
 								<h1 class="home-header prime-color">English Proficiency Assessment</h1>
-								<h3 class="home-header-arabic tertiary-color ">اختبار كفاءة اللغة الإنجليزية</h3>
+								<h3 class="home-header-arabic tertiary-color ">اختبار قياس كفاءة اللغة الانكليزية</h3>
 								<h5 class="home-header-arabic-desc" style="direction: rtl;">المقدم من Look In MENA</h5>
+								<p class="home-header-arabic-desc" style="direction: rtl;">يتكون من ١٠٠ سؤال من متعدد
+									متنوعين بالصعوبة, وعند
+									الانتهاء من الاختبار سنقدم لكم نصائح لتطوير لغتكم بناءً على درجة التقييم التي
+									ستحصلون عليها.<br>
+									الاختبار متجدد، أي أنه يتم عرض أسئلة جديدة دائماً عند إعادة الاختبار.
+									<br>
+									ليس هناك تقييد بالوقت، وإنما يتم عرض الوقت الذي استغرقتموه في النهاية.</p>
 								<button type="submit" class="btn-test btn-asses-submit btn-english-start" disabled>
 									<span class="questions-loading">
 										<div class="lds-facebook">
