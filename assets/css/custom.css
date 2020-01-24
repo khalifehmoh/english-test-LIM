@@ -61,6 +61,9 @@
     --light-grey-color: #dfdfdf;
 
     --super-light-grey-color: #ececec;
+
+    --english-test-green: rgb(21, 219, 158);
+    --english-test-blue: rgb(104, 191, 250);
 }
 
 .prime-color {
@@ -13446,14 +13449,34 @@ a {
     font-size: 1.1em;
 }
 
-.english-main-con .js-choices input[type="radio"]:checked+label,
+.english-main-con .js-choices .js-enabled-choice input[type="radio"]:checked+label,
 .Checked+label {
     background: var(--medium-grey-color);
     color: white;
     border: 1px solid var(--medium-grey-color);
 }
 
-.english-main-con .js-choices label:hover {
+.english-main-con .js-choices .js-disabled-choice label.js-right-choice {
+    background: rgb(0, 197, 137);
+    color: white;
+    border: 1px solid #dcdcdc;
+}
+
+.english-main-con .js-choices .js-disabled-choice label.js-right-choice:after {
+    content: ' ✔';
+}
+
+.english-main-con .js-choices .js-disabled-choice label.js-wrong-choice {
+    background: #ff4d44;
+    color: white;
+    border: 1px solid white;
+}
+
+.english-main-con .js-choices .js-disabled-choice label.js-wrong-choice:after {
+    content: ' ✖';
+}
+
+.english-main-con .js-choices .js-enabled-choice label:hover {
     background: #DDD;
 }
 
@@ -13679,24 +13702,14 @@ ul.progressbar li.current:before {
 
 ul.progressbar li.done:before,
 ul.progressbar li.done:after {
-    background: rgb(21, 219, 158);
+    background: var(--english-test-green);
     color: #fff;
 
 }
 
 ul.progressbar li.current:before {
-    background: rgb(104, 191, 250);
+    background: var(--english-test-blue);
     color: #fff;
-}
-
-
-ul.progressbar li.current:before {
-    background: rgb(104, 191, 250);
-    color: #fff;
-}
-
-ul.progressbar li.fail:before {
-    background: rgb(229, 48, 40)
 }
 
 /* .no-padding {
