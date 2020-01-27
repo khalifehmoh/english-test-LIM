@@ -250,8 +250,36 @@ var renderResult = function () {
         <br>
      </div>
     </div>
-    <div class="js-wrong-questions-content"></div>`
-    ;
+    <div class="js-wrong-questions" style="text-align:center">
+      <div class="container">
+        <!-- panel -->
+        <div class="panel-group" id="accordion-2">
+            <div class="panel" style="background: transparent">
+              <div class="panel-heading" style="width: 250px;
+              margin: 0 auto;position: relative;
+              bottom: -20px;
+              z-index: 999;">
+                <h4 class="panel-title"> <a style="direction:rtl;    height: 45px;
+                background: var(--medium-grey-color);color:white" data-toggle="collapse"
+                    href="#collapse1"
+                    class="collapsed" aria-expanded="false">الأسئلة الخاطئة</a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse"
+                aria-expanded="false">
+                <div class="panel-body" style="background-color: #fff;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
+                border-radius: 25px;">
+                  <div class="js-wrong-questions-content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>`
+  // <button class="btn-show-wrong-questions btn-test js-choice-submit-button" style="direction:rtl; width:240px">
+  //    عرض الأسئلة الخاطئة <i class="fa fa-caret-down"></i>
+  // </button>
   $(".js-container").html(result);
 }
 
@@ -635,6 +663,7 @@ function animateResult() {
   $(".js-feedback-summary-list").hide();
   $("#steps").hide();
   $("#result-level-text").hide();
+  $(".js-wrong-questions").hide();
   $(".js-container").animate({
     height: '300px'
   })
@@ -655,7 +684,8 @@ function animateResult() {
     $(".js-feedback-summary-con").fadeIn(1000).slideDown(2000, function () {
       $(".js-feedback-img").fadeIn(200, function () {
         $(".js-feedback-summary-header").fadeIn(200, function () {
-          $(".js-feedback-summary-list").fadeIn(500).slideDown(500)
+          $(".js-feedback-summary-list").fadeIn(500).slideDown(500);
+          $(".js-wrong-questions").fadeIn(600);
         });
 
       });

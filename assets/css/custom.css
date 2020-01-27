@@ -13466,14 +13466,14 @@ a {
     content: ' ✔';
 }
 
+.english-main-con .js-choices .js-disabled-choice label.js-wrong-choice:after {
+    content: ' ✖';
+}
+
 .english-main-con .js-choices .js-disabled-choice label.js-wrong-choice {
     background: #ff4d44;
     color: white;
     border: 1px solid white;
-}
-
-.english-main-con .js-choices .js-disabled-choice label.js-wrong-choice:after {
-    content: ' ✖';
 }
 
 .english-main-con .js-choices .js-enabled-choice label:hover {
@@ -13482,7 +13482,6 @@ a {
 
 .js-container.english-main-con {
     direction: ltr;
-    /* height: 420px; */
     margin: 35px 0;
     margin-top: 110px;
 }
