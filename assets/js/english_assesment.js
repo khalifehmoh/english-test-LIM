@@ -262,7 +262,7 @@ var renderResult = function () {
                 <h4 class="panel-title"> <a style="direction:rtl;    height: 45px;
                 background: var(--medium-grey-color);color:white" data-toggle="collapse"
                     href="#collapse1"
-                    class="collapsed" aria-expanded="false">الأسئلة الخاطئة</a>
+                    class="collapsed" aria-expanded="false">الإجابات الخاطئة</a>
                 </h4>
               </div>
               <div id="collapse1" class="panel-collapse collapse"
@@ -277,9 +277,6 @@ var renderResult = function () {
           </div>
         </div>
     </div>`
-  // <button class="btn-show-wrong-questions btn-test js-choice-submit-button" style="direction:rtl; width:240px">
-  //    عرض الأسئلة الخاطئة <i class="fa fa-caret-down"></i>
-  // </button>
   $(".js-container").html(result);
 }
 
@@ -301,7 +298,7 @@ var renderMistakes = function () {
   var questionsRender = `${wrongQuestionsDOM}`;
   $(".js-wrong-questions-content").html(questionsRender);
 }
-// src="../wp-content/themes/lookinmena/assets/images/test-grants2.svg"
+// 
 // 
 //event listeners
 
@@ -780,12 +777,24 @@ function generateFeedbackSummary() {
 function generateQuestionAnswersDOM(answersArray, requiredStateProp) {
   let answersDOMArray = [];
   let labelClass = '';
+  let ansHeight = '50px'
   if (requiredStateProp === 'pageQuestions') {
     labelClass = 'js-enabled-choice'
   }
   else {
     labelClass = 'js-disabled-choice'
   }
+  answersArray.forEach(answer => {
+    if (answer.title.length > 23) {
+      ansHeight = '75px'
+    }
+    else if (answer.title.length > 27) {
+      ansHeight = '80px'
+    }
+    else if (answer.title.length > 33) {
+      ansHeight = '110px'
+    }
+  })
   answersArray.forEach(answer => {
     let colSize = '';
     if (answersArray.length === 4) {
@@ -795,7 +804,7 @@ function generateQuestionAnswersDOM(answersArray, requiredStateProp) {
       colSize = 'col-md-4'
     }
     let answerHTML = `<div class="${colSize} col-sm-12">
-    <div class="js-choice ${labelClass}">
+    <div class="js-choice ${labelClass}" style="height: ${ansHeight}">
       <input class="js-radio-choice" type="radio" name="choice" id="${answer.id}" value="${answer.isRight}">
       <label class="${(requiredStateProp === 'wrongQuestions' && answer.isRight === '1') ? 'js-right-choice' : ''}
       ${(requiredStateProp === 'wrongQuestions' && answer.isSelectedAns === true) ? 'js-wrong-choice' : ''}
@@ -817,555 +826,8 @@ function addQuestionToQuestionsArray(index, reqQuestionTxt, reqQuestionChoices) 
 
 // Questions Repo
 function get_data() {
-  // var data = JSON.parse(globalData);
-  // var staticData = [{ "question": { "id": "87", "title": "You ____ wear a suit to work, but you can if you want.", "level": "medium", "mark": null }, "answers": [{ "id": "319", "title": "must", "question_id": "87", "isRight": "0" }, { "id": "320", "title": "mustn\u2019t", "question_id": "87", "isRight": "0" }, { "id": "321", "title": "could", "question_id": "87", "isRight": "0" }, { "id": "322", "title": "don\u2019t have to", "question_id": "87", "isRight": "1" }] }, { "question": { "id": "149", "title": "I can't move the sofa. Could you ____ me a hand with it, please?", "level": "hard", "mark": null }, "answers": [{ "id": "567", "title": "give", "question_id": "149", "isRight": "1" }, { "id": "568", "title": "get", "question_id": "149", "isRight": "0" }, { "id": "569", "title": "take", "question_id": "149", "isRight": "0" }, { "id": "570", "title": "borrow", "question_id": "149", "isRight": "0" }] }]
-  var staticData = [
-    {
-      "question": {
-        "id": "145",
-        "title": "She ____ the sack last month and is now looking for a new job.",
-        "level": "hard",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "552",
-          "title": "made",
-          "question_id": "145",
-          "isRight": "0"
-        },
-        {
-          "id": "554",
-          "title": "got",
-          "question_id": "145",
-          "isRight": "1"
-        },
-        {
-          "id": "553",
-          "title": "took",
-          "question_id": "145",
-          "isRight": "0"
-        },
-        {
-          "id": "551",
-          "title": "did",
-          "question_id": "145",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "118",
-        "title": "____ plans you might have for the holiday, you'll have to change them.",
-        "level": "hard",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "444",
-          "title": "Whovever",
-          "question_id": "118",
-          "isRight": "0"
-        },
-        {
-          "id": "443",
-          "title": "Wherever",
-          "question_id": "118",
-          "isRight": "0"
-        },
-        {
-          "id": "445",
-          "title": "Whatever",
-          "question_id": "118",
-          "isRight": "1"
-        },
-        {
-          "id": "446",
-          "title": "However",
-          "question_id": "118",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "195",
-        "title": "What _____________ do after work today?",
-        "level": "easy",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "778",
-          "title": "do you",
-          "question_id": "195",
-          "isRight": "0"
-        },
-        {
-          "id": "780",
-          "title": "are you going to",
-          "question_id": "195",
-          "isRight": "1"
-        },
-        {
-          "id": "777",
-          "title": "are you",
-          "question_id": "195",
-          "isRight": "0"
-        },
-        {
-          "id": "779",
-          "title": "you",
-          "question_id": "195",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "70",
-        "title": "The restaurant was _____ dirty. We didn\u2019t eat there.",
-        "level": "medium",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "253",
-          "title": "bit",
-          "question_id": "70",
-          "isRight": "0"
-        },
-        {
-          "id": "251",
-          "title": "extreme",
-          "question_id": "70",
-          "isRight": "0"
-        },
-        {
-          "id": "252",
-          "title": "extremely",
-          "question_id": "70",
-          "isRight": "1"
-        },
-        {
-          "id": "254",
-          "title": "very much",
-          "question_id": "70",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "156",
-        "title": "I have a cheese _____________ in the evening.",
-        "level": "easy",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "623",
-          "title": "cars",
-          "question_id": "156",
-          "isRight": "0"
-        },
-        {
-          "id": "622",
-          "title": "houses",
-          "question_id": "156",
-          "isRight": "0"
-        },
-        {
-          "id": "624",
-          "title": "sandwich",
-          "question_id": "156",
-          "isRight": "1"
-        },
-        {
-          "id": "621",
-          "title": "bags",
-          "question_id": "156",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "298",
-        "title": "It was a huge _____________ to hear that his mother was seriously ill.",
-        "level": "hard",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "1191",
-          "title": "adversity",
-          "question_id": "298",
-          "isRight": "0"
-        },
-        {
-          "id": "1192",
-          "title": "get over",
-          "question_id": "298",
-          "isRight": "0"
-        },
-        {
-          "id": "1190",
-          "title": "blow",
-          "question_id": "298",
-          "isRight": "1"
-        },
-        {
-          "id": "1189",
-          "title": "benefit",
-          "question_id": "298",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "205",
-        "title": "All of the sandwiches _____________ .",
-        "level": "medium",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "818",
-          "title": "are eating",
-          "question_id": "205",
-          "isRight": "0"
-        },
-        {
-          "id": "819",
-          "title": "were eating",
-          "question_id": "205",
-          "isRight": "0"
-        },
-        {
-          "id": "817",
-          "title": "were eaten",
-          "question_id": "205",
-          "isRight": "1"
-        },
-        {
-          "id": "820",
-          "title": "have eaten",
-          "question_id": "205",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "135",
-        "title": "She advised him ______ sunblocker.",
-        "level": "hard",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "512",
-          "title": "put on",
-          "question_id": "135",
-          "isRight": "0"
-        },
-        {
-          "id": "513",
-          "title": "to putting on",
-          "question_id": "135",
-          "isRight": "0"
-        },
-        {
-          "id": "514",
-          "title": "to put on",
-          "question_id": "135",
-          "isRight": "1"
-        },
-        {
-          "id": "511",
-          "title": "putting",
-          "question_id": "135",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "51",
-        "title": "________ at work yesterday?",
-        "level": "medium",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "177",
-          "title": "Did you",
-          "question_id": "51",
-          "isRight": "0"
-        },
-        {
-          "id": "178",
-          "title": "Is you",
-          "question_id": "51",
-          "isRight": "0"
-        },
-        {
-          "id": "175",
-          "title": "Was you",
-          "question_id": "51",
-          "isRight": "0"
-        },
-        {
-          "id": "176",
-          "title": "Were you",
-          "question_id": "51",
-          "isRight": "1"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "138",
-        "title": "The street was ____ crowded we couldn't pass.",
-        "level": "hard",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "525",
-          "title": "very",
-          "question_id": "138",
-          "isRight": "0"
-        },
-        {
-          "id": "523",
-          "title": "so",
-          "question_id": "138",
-          "isRight": "1"
-        },
-        {
-          "id": "526",
-          "title": "as",
-          "question_id": "138",
-          "isRight": "0"
-        },
-        {
-          "id": "524",
-          "title": "such",
-          "question_id": "138",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "29",
-        "title": "I'm from Berlin. ____ is in Germany.",
-        "level": "easy",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "91",
-          "title": "She",
-          "question_id": "29",
-          "isRight": "0"
-        },
-        {
-          "id": "88",
-          "title": "They",
-          "question_id": "29",
-          "isRight": "0"
-        },
-        {
-          "id": "90",
-          "title": "He",
-          "question_id": "29",
-          "isRight": "0"
-        },
-        {
-          "id": "89",
-          "title": "It",
-          "question_id": "29",
-          "isRight": "1"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "69",
-        "title": "I plan to ____ three weeks by the beach.",
-        "level": "medium",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "247",
-          "title": "bring",
-          "question_id": "69",
-          "isRight": "0"
-        },
-        {
-          "id": "249",
-          "title": "spending",
-          "question_id": "69",
-          "isRight": "0"
-        },
-        {
-          "id": "250",
-          "title": "making",
-          "question_id": "69",
-          "isRight": "0"
-        },
-        {
-          "id": "248",
-          "title": "spend",
-          "question_id": "69",
-          "isRight": "1"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "278",
-        "title": "High street shops are under _____________ from online businesses.",
-        "level": "hard",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "1110",
-          "title": "pressure",
-          "question_id": "278",
-          "isRight": "1"
-        },
-        {
-          "id": "1111",
-          "title": "control",
-          "question_id": "278",
-          "isRight": "0"
-        },
-        {
-          "id": "1112",
-          "title": "the radar",
-          "question_id": "278",
-          "isRight": "0"
-        },
-        {
-          "id": "1109",
-          "title": "the weather",
-          "question_id": "278",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "238",
-        "title": "Wine _____________ made in Italy for thousands of years.",
-        "level": "medium",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "952",
-          "title": "are being",
-          "question_id": "238",
-          "isRight": "0"
-        },
-        {
-          "id": "949",
-          "title": "have been",
-          "question_id": "238",
-          "isRight": "0"
-        },
-        {
-          "id": "951",
-          "title": "has been",
-          "question_id": "238",
-          "isRight": "0"
-        },
-        {
-          "id": "950",
-          "title": "is being",
-          "question_id": "238",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "172",
-        "title": "This building is _____________ I like it very much.",
-        "level": "easy",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "685",
-          "title": "fantastic",
-          "question_id": "172",
-          "isRight": "1"
-        },
-        {
-          "id": "688",
-          "title": "bad",
-          "question_id": "172",
-          "isRight": "0"
-        },
-        {
-          "id": "686",
-          "title": "awful",
-          "question_id": "172",
-          "isRight": "0"
-        },
-        {
-          "id": "687",
-          "title": "not good",
-          "question_id": "172",
-          "isRight": "0"
-        }
-      ]
-    },
-    {
-      "question": {
-        "id": "40",
-        "title": "____ are the glasses? On the table.",
-        "level": "easy",
-        "mark": null
-      },
-      "answers": [
-        {
-          "id": "132",
-          "title": "When",
-          "question_id": "40",
-          "isRight": "0"
-        },
-        {
-          "id": "134",
-          "title": "Who",
-          "question_id": "40",
-          "isRight": "0"
-        },
-        {
-          "id": "133",
-          "title": "Where",
-          "question_id": "40",
-          "isRight": "1"
-        },
-        {
-          "id": "131",
-          "title": "What",
-          "question_id": "40",
-          "isRight": "0"
-        }
-      ]
-    }
-  ]
-  state.questionsData = staticData;
+  var data = JSON.parse(globalData);
+  state.questionsData = data;
   const total = state.questionsData.length;
   addNumberOfQuestions(state, total)
 }

@@ -13270,9 +13270,12 @@ a {
     margin: 40px 0
 }
 
+.js-wrong-questions .js-q-box {
+    padding: 0 0px;
+}
+
 .js-q-box {
     padding: 0 80px;
-    /* padding-left: 100px; */
     margin: 75px 0;
 }
 
@@ -13437,7 +13440,6 @@ a {
     z-index: 100;
 }
 
-
 .english-main-con .js-choices label {
     padding: 2px;
     border: 1px solid #CCC;
@@ -13447,6 +13449,10 @@ a {
     text-align: center;
     color: var(--medium-grey-color);
     font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 20px;
 }
 
 .english-main-con .js-choices .js-enabled-choice input[type="radio"]:checked+label,
@@ -13463,11 +13469,13 @@ a {
 }
 
 .english-main-con .js-choices .js-disabled-choice label.js-right-choice:after {
-    content: ' ✔';
+    content: '✔';
+    padding-left: 5px;
 }
 
 .english-main-con .js-choices .js-disabled-choice label.js-wrong-choice:after {
-    content: ' ✖';
+    content: '✖';
+    padding-left: 5px;
 }
 
 .english-main-con .js-choices .js-disabled-choice label.js-wrong-choice {
