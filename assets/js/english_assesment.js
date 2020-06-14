@@ -250,7 +250,10 @@ var renderResult = function () {
         <br>
      </div>
     </div>
-    <div class="js-wrong-questions" style="text-align:center">
+    <button id="floating-btn" class="btn-floating-wrong vert-move">
+      الإجابات الخاطئة
+    </button>  
+    <div class="js-wrong-questions" id="wrong-questions" style="text-align:center">
       <div class="container">
         <!-- panel -->
         <div class="panel-group" id="accordion-2">
@@ -262,11 +265,11 @@ var renderResult = function () {
                 <h4 class="panel-title"> <a style="direction:rtl;    height: 45px;
                 background: var(--medium-grey-color);color:white" data-toggle="collapse"
                     href="#collapse1"
-                    class="collapsed" aria-expanded="false">الإجابات الخاطئة</a>
+                     aria-expanded="true">الإجابات الخاطئة</a>
                 </h4>
               </div>
-              <div id="collapse1" class="panel-collapse collapse"
-                aria-expanded="false">
+              <div id="collapse1" class="panel-collapse"
+                aria-expanded="true">
                 <div class="panel-body" style="background-color: #fff;
                 box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
                 border-radius: 25px;">
@@ -640,15 +643,13 @@ function handleResultBar() {
 
 }
 
-// function handleViewResult() {
-//   $(".js-container").on("click", ".js-view-result", function (event) {
-//     $('.js-question-page').fadeOut('slow', function () {
-//       renderResult();
-//       animateResult();
-//     })
-
-//   })
-// }
+function handleWrongAnsFloatClick() {
+  $('.js-container').on('click', '.btn-floating-wrong', function () {
+    $('.btn-floating-wrong').hide();
+    $(".js-wrong-questions").fadeIn(600);
+    document.getElementById('wrong-questions').scrollIntoView();
+  });
+}
 
 function animateResult() {
   $(".js-feedback-header").hide()
@@ -661,6 +662,7 @@ function animateResult() {
   $("#steps").hide();
   $("#result-level-text").hide();
   $(".js-wrong-questions").hide();
+  $(".btn-floating-wrong").hide();
   $(".js-container").animate({
     height: '300px'
   })
@@ -682,7 +684,7 @@ function animateResult() {
       $(".js-feedback-img").fadeIn(200, function () {
         $(".js-feedback-summary-header").fadeIn(200, function () {
           $(".js-feedback-summary-list").fadeIn(500).slideDown(500);
-          $(".js-wrong-questions").fadeIn(600);
+          $(".btn-floating-wrong").fadeIn(600);
         });
 
       });
@@ -839,6 +841,7 @@ $(function () {
   handleSubmitAnswers();
   handleViewResult();
   handleProgressBar();
-  handleResultBar()
+  handleResultBar();
+  handleWrongAnsFloatClick()
 })
 
